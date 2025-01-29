@@ -18,11 +18,13 @@ public class UserBuilderHelper {
     private static final String PHONE = "phone_number";
     private static final String EMAIL_VERIFIED = "email_verified";
     private static final String PHONE_VERIFIED = "phone_number_verified";
+    private static final String PROFILE = "profile";
+
     private final CognitoConfiguration config;
 
      public User build (UserType userType) {
         var user = new User();
-        user.setLogin(userType.getUsername());;
+        user.setLogin(userType.getUsername());
 
         var map = userType.getAttributes()
                 .stream()
@@ -31,6 +33,7 @@ public class UserBuilderHelper {
         user.setId(map.get(ID));
         user.setEmail(map.get(EMAIL));
         user.setPhone(map.get(PHONE));
+        user.setProfile(map.get(PROFILE));
 
         user.setCreated(userType.getUserCreateDate());
         user.setModified(userType.getUserLastModifiedDate());
@@ -41,7 +44,7 @@ public class UserBuilderHelper {
 
     public User build (AdminGetUserResult userResult) {
         var user = new User();
-        user.setLogin(userResult.getUsername());;
+        user.setLogin(userResult.getUsername());
 
         var map = userResult.getUserAttributes()
                 .stream()
@@ -50,6 +53,7 @@ public class UserBuilderHelper {
         user.setId(map.get(ID));
         user.setEmail(map.get(EMAIL));
         user.setPhone(map.get(PHONE));
+        user.setProfile(map.get(PROFILE));
 
         user.setCreated(userResult.getUserCreateDate());
         user.setModified(userResult.getUserLastModifiedDate());
@@ -66,7 +70,8 @@ public class UserBuilderHelper {
                          new AttributeType().withName(EMAIL).withValue(user.getEmail()),
                          new AttributeType().withName(EMAIL_VERIFIED).withValue("true"),
                          new AttributeType().withName(PHONE).withValue(user.getPhone()),
-                         new AttributeType().withName(PHONE_VERIFIED).withValue("true")
+                         new AttributeType().withName(PHONE_VERIFIED).withValue("true"),
+                         new AttributeType().withName(PROFILE).withValue(user.getProfile().name())
                  );
     }
 
