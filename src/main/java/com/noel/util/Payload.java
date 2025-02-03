@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class Payload {
     @JsonProperty("sub")
-    private String useId;
+    private String userId;
 
     // This is how we parse the payload and get the user id
     public static Payload generate(String json) {

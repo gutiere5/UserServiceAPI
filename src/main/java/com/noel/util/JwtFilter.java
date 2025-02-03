@@ -1,10 +1,12 @@
 package com.noel.util;
 
+import com.noel.service.CognitoUserService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.naming.spi.ObjectFactory;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Optional;
@@ -13,6 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JwtFilter implements Filter {
 
+    private final CognitoUserService userService;
+    private final ObjectFactory<UserContext> userContextFactory;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -26,10 +30,14 @@ public class JwtFilter implements Filter {
                 .map(String :: new)
                 .ifPresent(this::setContext);
         filterChain.doFilter(servletRequest, servletResponse );
-                
     }
 
-    private void setContext(String s) {
-        System.out.println(s);
+    private void setContext(String payloadJson) {
+        Optional.of(payloadJson)
+                .map(Payload::generate)
+                .map(Payload::getUserId)
+                .map(userService::getUser)
+
+
     }
 }
