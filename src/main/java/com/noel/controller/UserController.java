@@ -2,8 +2,10 @@ package com.noel.controller;
 
 import com.noel.model.User;
 import com.noel.service.UserService;
+import com.noel.util.UserContext;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,22 +17,16 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-    /*
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello World";
-    }
-    */
+    private final ObjectFactory<UserContext> context;
 
     @PostMapping
     public User create (@Valid @RequestBody User user) {
-
         return userService.create(user);
     }
 
     @GetMapping
     public List<User> getAll() {
+        context.getObject().assertAdmin();
         return userService.getAllUsers();
     }
 
