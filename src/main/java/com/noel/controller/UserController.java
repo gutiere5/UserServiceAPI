@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 
-public class UserController {
+public class UserController extends BaseController {
 
     private final UserService userService;
     private final ObjectFactory<UserContext> context;
