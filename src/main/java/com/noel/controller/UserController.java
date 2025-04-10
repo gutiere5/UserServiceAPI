@@ -26,7 +26,7 @@ public class UserController extends BaseController {
 
     @GetMapping
     public List<User> getAll() {
-        context.getObject().assertAdmin();
+        //context.getObject().assertAdmin(); Will authenticate in gateway microservice
         return userService.getAllUsers();
     }
 
