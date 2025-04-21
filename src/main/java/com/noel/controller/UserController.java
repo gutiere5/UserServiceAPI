@@ -2,7 +2,6 @@ package com.noel.controller;
 
 import com.noel.model.User;
 import com.noel.service.UserService;
-import com.noel.util.UserContext;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.ObjectFactory;
@@ -17,8 +16,6 @@ import java.util.List;
 public class UserController extends BaseController {
 
     private final UserService userService;
-    private final ObjectFactory<UserContext> context;
-
     @PostMapping
     public User create (@Valid @RequestBody User user) {
         return userService.create(user);
