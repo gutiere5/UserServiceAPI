@@ -4,7 +4,6 @@ import com.noel.model.User;
 import com.noel.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

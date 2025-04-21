@@ -45,8 +45,8 @@ public class CognitoUserService implements UserService{
         return createdUser;
     }
 
-    // It works fine until user pool contains less than 60 items
-    // after that you have to do user pagination token to get all users chunk by chunk
+    // It works fine until the User pool contains less than 60 items
+    // After, that you have to do user pagination token to get all users chunk by chunk
     @Override
     public List<User> getAllUsers() {
         var request = new ListUsersRequest()
