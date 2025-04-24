@@ -41,5 +41,5 @@ tasks.named('test') {
 
 tasks.bootJar
 		{
-			archiveFileName = "myApp.jar"
+			archiveFileName = "user-service.jar"
 		}

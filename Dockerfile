@@ -1,3 +1,3 @@
 FROM openjdk:17
-COPY build/libs/myApp.jar myApp.jar
-ENTRYPOINT ["java", "-jar", "/myApp.jar"]
+COPY build/libs/user-service.jar user-service.jar
+ENTRYPOINT ["java", "-jar", "/user-service.jar"]
